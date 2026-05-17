@@ -1,0 +1,33 @@
+const canvas = document.getElementById("chart");
+const ctx = canvas.getContext("2d");
+
+let prices = Array(30).fill(4200);
+
+// draw chart
+function drawChart() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height - (prices[0] / 100));
+
+  for (let i = 1; i < prices.length; i++) {
+    ctx.lineTo(i * 10, canvas.height - (prices[i] / 100));
+  }
+
+  ctx.strokeStyle = "#22c55e";
+  ctx.stroke();
+}
+
+// update price simulation
+function updateChart() {
+  let change = (Math.random() - 0.5) * 100;
+  let lastPrice = prices[prices.length - 1] + change;
+
+  prices.push(lastPrice);
+  prices.shift();
+
+  drawChart();
+}
+
+setInterval(updateChart, 1000);
+drawChart();
