@@ -1,0 +1,19 @@
+function updateMarkets() {
+  const list = document.getElementById("marketList");
+  list.innerHTML = "";
+
+  for (let market in markets) {
+    let change = (Math.random() - 0.5) * 80;
+    markets[market] += change;
+
+    let direction = change >= 0 ? "🟢" : "🔴";
+
+    const li = document.createElement("li");
+    li.innerText = `${market}: ${markets[market].toFixed(2)} ${direction}`;
+
+    list.appendChild(li);
+  }
+}
+
+setInterval(updateMarkets, 2000);
+updateMarkets();
