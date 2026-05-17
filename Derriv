@@ -1,0 +1,68 @@
+const canvas = document.getElementById("chart");
+const ctx = canvas.getContext("2d");
+
+let candles = [];
+
+// create initial candles
+for (let i = 0; i < 20; i++) {
+  let open = 4200 + Math.random() * 100;
+  let close = open + (Math.random() - 0.5) * 80;
+  let high = Math.max(open, close) + Math.random() * 30;
+  let low = Math.min(open, close) - Math.random() * 30;
+
+  candles.push({ open, close, high, low });
+}
+
+// draw candles
+function drawCandles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  let width = 10;
+  let spacing = 12;
+
+  candles.forEach((c, i) => {
+    let x = i * spacing;
+
+    let scale = 0.05;
+
+    let openY = canvas.height - c.open * scale;
+    let closeY = canvas.height - c.close * scale;
+    let highY = canvas.height - c.high * scale;
+    let lowY = canvas.height - c.low * scale;
+
+    // wick
+    ctx.beginPath();
+    ctx.moveTo(x, highY);
+    ctx.lineTo(x, lowY);
+    ctx.strokeStyle = "#ffffff";
+    ctx.stroke();
+
+    // body
+    ctx.fillStyle = c.close > c.open ? "#22c55e" : "#ef4444";
+
+    ctx.fillRect(
+      x - width / 2,
+      Math.min(openY, closeY),
+      width,
+      Math.abs(openY - closeY)
+    );
+  });
+}
+
+// update candles
+function updateCandles() {
+  let last = candles[candles.length - 1];
+
+  let open = last.close;
+  let close = open + (Math.random() - 0.5) * 80;
+  let high = Math.max(open, close) + Math.random() * 30;
+  let low = Math.min(open, close) - Math.random() * 30;
+
+  candles.push({ open, close, high, low });
+  candles.shift();
+
+  drawCandles();
+}
+
+setInterval(updateCandles, 1500);
+drawCandles();
