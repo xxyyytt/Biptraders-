@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trading Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Trading Dashboard</h1>
+
+    <div class="card">
+      <h2>Account Status</h2>
+      <p id="status">Connecting...</p>
+    </div>
+
+    <div class="card">
+      <h2>Balance</h2>
+      <p id="balance">$0.00</p>
+    </div>
+
+    <button onclick="connect()">Connect API</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
