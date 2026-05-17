@@ -1,0 +1,4 @@
+<div class="card">
+  <h2>Volatility Markets</h2>
+  <ul id="marketList"></ul>
+</div>
